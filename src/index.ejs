@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+<% if (htmlWebpackPlugin.options.nodeModules) { %>
+<!-- Add `node_modules/` to global paths so `require` works properly in development -->
+<script>
+require('module').globalPaths.push('<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, '\\\\') %>')
+</script>
+<% } %>
+<script>
+R = require('electron').remote
+WIN = R.getCurrentWindow()
+function maxmin(btn){
+    var s;
+    if (!WIN.isMaximized()) {
+        WIN.maximize();
+        s = 'box'
+    } else {
+        s = 'max'
+        WIN.unmaximize();
+    }
+    btn.className = "I I-win"+s
+}
+</script>
+</head>
+
+<body>
+    <header id="wBar">
+        <div class="rBtn">
+<b class="I I-winmax" onclick="maxmin(this)"></b><b class="I I-close" onclick="WIN.close()"></b>
+        </div>
+        <div style="padding-left:16px;">
+            <%= require('./main/const/slogan.coffee') %>
+        </div>
+    </header>
+    <div id="app" style="-webkit-app-region:no-drag"></div>
+    <!-- Set `__static` path to static files in production -->
+    <script>
+        if (process.env.NODE_ENV !== 'development') window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+    </script>
+
+    <!-- webpack builds are automatically injected -->
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+body {
+    user-select: none;
+}
+
+div {
+    cursor: default;
+}
+
+#wBar {
+    -webkit-app-region: drag;
+    overflow: hidden;
+    background: #333;
+    color: #fff;
+    font-size: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 42px;
+    line-height: 42px;
+
+    .rBtn {
+        -webkit-app-region: no-drag;
+        float: right;
+
+        b {
+            display: inline-block;
+            font-size: 24px;
+            width: 42px;
+            height: 42px;
+            text-align: center;
+            cursor: pointer;
+
+            &:hover {
+                background: #444;
+                color: #fff;
+            }
+        }
+    }
+}
+
+#app {
+    overflow: auto;
+}
